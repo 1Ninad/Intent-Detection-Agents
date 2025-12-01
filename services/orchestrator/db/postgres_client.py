@@ -33,7 +33,7 @@ logger.setLevel(logging.INFO)
 # Database configuration
 DATABASE_URL = os.getenv(
     "DATABASE_URL",
-    "postgresql://localhost:5432/sales_prospects"
+    "postgresql://neondb_owner:npg_KAO6Lsh7YlWN@ep-mute-dust-ahzf2sw4-pooler.c-3.us-east-1.aws.neon.tech/neondb?sslmode=require&channel_binding=require"
 )
 
 # Connection pool

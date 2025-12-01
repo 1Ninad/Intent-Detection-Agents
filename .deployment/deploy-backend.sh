@@ -11,10 +11,10 @@ echo "Deploying backend to Google Cloud Run..."
 
 # Build image
 gcloud builds submit \
-  --config=cloudbuild.backend.yaml \
+  --config=.deployment/cloudbuild.backend.yaml \
   --timeout=20m \
   --project=$PROJECT_ID \
-  ..
+  .
 
 # Deploy to Cloud Run
 gcloud run deploy intent-backend \
@@ -27,8 +27,7 @@ gcloud run deploy intent-backend \
   --cpu 2 \
   --timeout 300 \
   --max-instances 10 \
-  --add-cloudsql-instances=intent-detection-agent:asia-south1:intent-postgres \
-  --set-secrets="OPENAI_API_KEY=OPENAI_API_KEY:latest,PPLX_API_KEY=PPLX_API_KEY:latest,DATABASE_URL=DATABASE_URL:latest" \
+  --set-secrets="DATABASE_URL=DATABASE_URL:latest,OPENAI_API_KEY=OPENAI_API_KEY:latest,PPLX_API_KEY=PPLX_API_KEY:latest" \
   --set-env-vars="LLM_MODEL=gpt-4o-mini" \
   --project=$PROJECT_ID
 
