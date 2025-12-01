@@ -54,12 +54,14 @@ export async function runSearch(request: RunRequest): Promise<RunResponse> {
     if (error instanceof ApiError) {
       throw error;
     }
+
     if (error instanceof TypeError && error.message.includes('fetch')) {
       throw new ApiError(
-        'Cannot connect to backend service. Make sure the orchestrator is running on port 8004.',
-        0
-      );
-    }
+        'Cannot connect to backend service. Please try again.',
+      0
+    );
+  }
+
     throw new ApiError(
       `Unexpected error: ${error instanceof Error ? error.message : String(error)}`,
       0
